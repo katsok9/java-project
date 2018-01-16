@@ -85,7 +85,7 @@ pipeline {
             <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${
                                 env.BUILD_NUMBER
                             }]</a>&QUOT;</p>""",
-                            to: "brandon@linuxacademy.com"
+                            to: "katsok9@linuxacademy.com"
                     )
                 }
             }
