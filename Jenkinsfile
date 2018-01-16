@@ -23,7 +23,7 @@ pipeline {
         stage('deploy') {
             agent { label 'apache' }
             steps {
-                sh "mkdir /var/www/html/rectangles/all/${env.BRANCH_NAME}/"
+                sh "if ![ -d '/var/www/html/rectangles/all/${env.BRANCH_NAME}/' ]; then mkdir /var/www/html/rectangles/all/${env.BRANCH_NAME}/; fi"
                 sh "cp dist/rectangle_${env.BUILD_NUMBER}.jar /var/www/html/rectangles/all/${env.BRANCH_NAME}/"
             }
         }
@@ -74,8 +74,8 @@ pipeline {
                 echo 'Pushing to Origin Master'
                 sh 'git push origin master'
                 echo 'Tagging the Release'
-                sh "git tag rectangle-${env.MAJOR_VERSION}.${env.BUILD_NUMBER}"
-                sh "git push origin rectangle-${env.MAJOR_VERSION}.${env.BUILD_NUMBER}"
+                sh "git tag rectangle.${env.BUILD_NUMBER}"
+                sh "git push origin rectangle.${env.BUILD_NUMBER}"
             }
             post {
                 success {
