@@ -51,7 +51,7 @@ pipeline {
                 branch 'master'
             }
             steps {
-                sh "cp /var/www/html/rectangles/all/rectangle_${env.BUILD_NUMBER}.jar /var/www/html/rectangles/green/rectangle_${env.BUILD_NUMBER}.jar"
+                sh "cp /var/www/html/rectangles/all/${env.BRANCH_NAME}/rectangle_${env.BUILD_NUMBER}.jar /var/www/html/rectangles/green/rectangle_${env.BUILD_NUMBER}.jar"
             }
         }
         stage('Promote Development Branch to Master') {
@@ -85,7 +85,7 @@ pipeline {
             <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${
                                 env.BUILD_NUMBER
                             }]</a>&QUOT;</p>""",
-                            to: "brandon@linuxacademy.com"
+                            to: "katsok9@linuxacademy.com"
                     )
                 }
             }
