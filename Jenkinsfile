@@ -11,6 +11,20 @@ pipeline {
         sayHello 'Awesome Student!'
       }
     }
+    stage('Git Information') {
+      agent any
+
+      steps {
+        echo "My Branch Name: ${env.BRANCH_NAME}"
+
+        script {
+          def myLib = new linuxacademy.git.gitStuff();
+
+          echo "My Commit: ${myLib.gitcommit("${env.WORKSPACE}/.git")}"
+        }
+      }
+    }
+
     stage('Unit Tests') {
       agent { label 'apache' }
       steps {
@@ -91,7 +105,9 @@ pipeline {
           emailext(
                   subject: "${env.JOB_NAME} [${env.BUILD_NUMBER}] Development Promoted to Master!",
                   body: """<p>'${env.JOB_NAME} [${env.BUILD_NUMBER}]' Development Promoted to Master":</p>
-            <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>""",
+            <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${
+                    env.BUILD_NUMBER
+                  }]</a>&QUOT;</p>""",
                   to: "Katsok9Devops@gmail.com"
           )
         }
