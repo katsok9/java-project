@@ -20,7 +20,7 @@ pipeline {
         script {
           def myLib = new linuxacademy.git.gitStuff();
 
-          echo "My Commit: ${myLib.gitCommit("${env.WORKSPACE}/.git")}"
+          echo "My Commit: ${myLib.gitcommit("${env.WORKSPACE}/.git")}"
         }
       }
     }
